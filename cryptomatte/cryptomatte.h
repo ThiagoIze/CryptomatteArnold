@@ -588,12 +588,9 @@ inline bool get_material_name(const AtShaderGlobals* sg, const AtNode* node, con
 inline void write_manifest_to_string(const ManifestMap& map, String& manf_string) {
     ManifestMap::const_iterator map_it = map.begin();
     const size_t map_entries = map.size();
-    const size_t max_entries = 100000;
     size_t metadata_entries = map_entries;
-    if (map_entries > max_entries) {
-        AiMsgWarning("Cryptomatte: %lu entries in manifest, limiting to %lu", //
-                     map_entries, max_entries);
-        metadata_entries = max_entries;
+    if (map_entries > 100000) {
+        AiMsgWarning("Cryptomatte: %lu entries in manifest is very high", map_entries);
     }
 
     manf_string.append("{");
